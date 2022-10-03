@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../LIBFT/intra-uuid-032534a8-609b-4aba-a2b3-f9e4cc88e1ea-4175890-drobles"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"get_next_line.h": "c"
+		}
+	}
+}

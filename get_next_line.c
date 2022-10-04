@@ -6,36 +6,34 @@
 /*   By: drobles <drobles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:34:02 by marvin            #+#    #+#             */
-/*   Updated: 2022/09/27 11:18:05 by drobles          ###   ########.fr       */
+/*   Updated: 2022/10/04 15:23:55 by drobles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-// char *get_next_line(int fd)	
-// {
-// 	char * linea;
-// 	//int	i;
-// 	char buf[10];
-// 	ssize_t nr_bytes;
-	
-// 	linea = (char *)malloc(sizeof(char *) * (ft_strlen(buf) + 1));
-	
-// 	if (fd == -1)
-// 		return (NULL);
-// 	else
-// 		nr_bytes = read(fd, buf, 1);
-// 		linea = ft_strcopy(linea, &buf);
-// 		return (linea);
-/*int main()
+char *get_next_line(int fd)	
 {
-	int fd;
+	char *linea;
+	char *buf;
+	char *auxiliar;
+	static char *box;
+	int nr_bytes;
+	size_t i;
 	
-	fd = open("/Users/drobles/getnextline42/mifichero". O_RDONLY);
-	return 0;
-	
-}*/
-
+	i = 0;
+	linea = NULL;
+	buf = malloc(BUFFER_SIZE);
+	if (!buf)
+		return (NULL);
+	buf[BUFFER_SIZE + 1] = '\0';
+	if (read(fd, 0, 0) < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	nr_bytes = read(fd, buf, BUFFER_SIZE);
+	if (box)
+		auxiliar = ft_strjoin(box, buf);
+	else
+		auxiliar = ft_strdup(buf);
 	
 
 

@@ -9,83 +9,89 @@
 char *get_next_line(int fd)	
 {
 	char *linea;
-
 	char *buf;
-	static char *auxiliar;
+	char *auxiliar;
+	static char *box;
 	int nr_bytes;
 	size_t i;
-	int j;
 	
 	i = 0;
-	j = 0;
 	linea = NULL;
-	buf = malloc(BUFFER_SIZE + 1);
+	buf = malloc(BUFFER_SIZE +1);
 	if (!buf)
 		return (NULL);
-	buf[BUFFER_SIZE + 1] = '\0';
+	buf[BUFFER_SIZE] = '\0';
 	if (read(fd, 0, 0) < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	nr_bytes = read(fd, buf, BUFFER_SIZE);
-	if (auxiliar)
-		auxiliar = ft_strjoin(auxiliar, buf);
+	if (box)
+		auxiliar = ft_strjoin(box, buf);
 	else
 		auxiliar = ft_strdup(buf);
-	printf("Buffer  1-->%s\n", buf);
-	printf("Auxiliar 1 -->%s\n", auxiliar);
-	if (nr_bytes > 0)
+	// printf("Buffer  1-->%s\n", buf);
+	// printf("Auxiliar 1 -->%s\n", auxiliar);
+	if (nr_bytes > 0 || box)
 	{
-		while (nr_bytes == BUFFER_SIZE && !linea)
+		while (auxiliar)
 		{
 			if (ft_strchr(auxiliar,'\n'))
 			{
+				i = 0;
 				while (auxiliar[i] != '\n')
 					{
 						i++;
 					}
 				linea = ft_substr(auxiliar, 0, i);
-				auxiliar = ft_substr(auxiliar, i + 1, ft_strlen(auxiliar + i +1));
+				// (printf("Linea --->%s\n", linea));
+				box = ft_substr(auxiliar, i +1 , ft_strlen(auxiliar) - i);
+				// (printf("Box --->%s\n", box));
+				free (auxiliar);
+				// (printf("Pre free --->%s\n", auxiliar));
+				auxiliar = ft_strdup(box);
+				// (printf("Copia box --->%s\n", auxiliar));
 				return (linea);
 			}
 			else
-			{	
-				if (auxiliar && nr_bytes > 0)
+			{
+				nr_bytes = read(fd, buf, BUFFER_SIZE);
+				if (nr_bytes > 0)
 				{
-					nr_bytes = read(fd, buf, BUFFER_SIZE);
 					auxiliar = ft_strjoin(auxiliar, buf);
 				}
-				else if (auxiliar)
-				{
-					linea = ft_strdup(auxiliar);
-					auxiliar = NULL;
-					return (linea);
-				}
 				else
-					auxiliar = buf;
+				{
+					return (auxiliar);
+				}
 			}
-			printf("Auxiliar -->%s\n", auxiliar);
+			
 		}
 	}
 	linea = ft_strdup(auxiliar);
+	free (auxiliar);
+	free (box);
 	return (linea);
 	
 }
 
-int main()
-{
-	int fd;
-	/*char buffer [50];
-	int szbytes;*/
-	char *ptr;
+// int main()
+// {
+// 	int fd;
+// 	/*char buffer [50];
+// 	int szbytes;*/
+// 	char *ptr;
 
-	fd = open("/Users/drobles/getnextline42/mifichero", O_RDONLY);
-	ptr = get_next_line(fd);
-	printf("Output -->%s\n", ptr);
-	free(ptr);
-	ptr = get_next_line(fd);
-	printf("Output -->%s\n", ptr);
-	free(ptr);
-	ptr = get_next_line(fd);
-	printf("Output -->%s\n", ptr);
-	close(fd);
-	return(0);
-}
+// 	fd = open("/Users/drobles/getnextline42/gnlTester/files/empty", O_RDONLY);
+// 	ptr = get_next_line(fd);
+// 	printf("Output -->%s\n", ptr);
+// 	free(ptr);
+// 	ptr = get_next_line(fd);
+// 	printf("Output -->%s\n", ptr);
+// 	free(ptr);
+// 	ptr = get_next_line(fd);
+// 	printf("Output -->%s\n", ptr);
+// 	ptr = get_next_line(fd);
+// 	printf("Output -->%s\n", ptr);
+// 	free(ptr);
+// 	close(fd);
+// 	return(0);
+// }

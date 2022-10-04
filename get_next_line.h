@@ -6,14 +6,14 @@
 /*   By: drobles <drobles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:36:13 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/03 17:14:08 by drobles          ###   ########.fr       */
+/*   Updated: 2022/10/04 17:05:19 by drobles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H 
 # define GET_NEXT_LINE_H 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4
+#  define BUFFER_SIZE 1
 # endif
 # include <stdio.h>
 # include <string.h>

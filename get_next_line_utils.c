@@ -6,7 +6,7 @@
 /*   By: drobles <drobles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:10:26 by drobles           #+#    #+#             */
-/*   Updated: 2022/10/03 18:47:15 by drobles          ###   ########.fr       */
+/*   Updated: 2022/10/10 10:50:59 by drobles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,8 @@ static char	*ft_strcat(char *dest, char *src)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*aux1;
-	char	*aux2;
 	char	*con;
 	size_t	i;
 	size_t	j;
@@ -160,16 +158,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	i = 0;
 	j = ft_strlen(s1) + ft_strlen(s2);
-	aux1 = (char *)s1;
-	aux2 = (char *)s2;
 	con = ft_calloc((sizeof(char) * j + 1), 1);
 	if (!con)
 		return (NULL);
-	while (aux1[i])
+	while (s1[i])
 	{
-		con[i] = aux1[i];
+		con[i] = s1[i];
 		i++;
 	}
-	ft_strcat(con, aux2);
+	ft_strcat(con, s2);
+	free(s1);
 	return (con);
 }
